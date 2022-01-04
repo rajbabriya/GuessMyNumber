@@ -47,7 +47,9 @@ const FirstScreen = (props) => {
   if (confirmed) {
     op = (
       <Card style={styles.opcontainer}>
-        <Text style={{ textAlign: "center" }}>Selected Number</Text>
+        <Text style={({ textAlign: "center" }, styles.textselect)}>
+          Selected Number
+        </Text>
         <NumberContainer>{confirmedData}</NumberContainer>
         <Button
           title="START GAME"
@@ -66,7 +68,7 @@ const FirstScreen = (props) => {
       <View style={styles.screen}>
         <Text style={styles.title}>Start a New Game</Text>
         <Card style={styles.InputCon}>
-          <Text>Select Number</Text>
+          <Text style={styles.textselect}>Select Number</Text>
           <InputNumber
             style={styles.numberInput}
             blurOnSubmit
@@ -116,7 +118,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   title: {
-    fontSize: 20,
+    fontSize: 40,
+    fontFamily: "drive-corps-3D",
     marginVertical: 10,
   },
   btnContainer: {
@@ -134,6 +137,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginVertical: 20,
+  },
+  textselect: {
+    fontSize: 22,
+    fontFamily: "drivecorps",
   },
 });
 

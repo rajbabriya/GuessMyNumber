@@ -4,16 +4,58 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Header from "./components/header.js";
 import FirstScreen from "./screens/firstScreen.js";
+import GameOver from "./screens/GameOver.js";
+import * as Font from "expo-font";
+// import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    drivecorps: require("./assets/fonts/drivecorps.ttf"),
+    "black-light1": require("./assets/fonts/TheBlacklight.ttf"),
+    "drive-corps-3D": require("./assets/fonts/drivecorps3d.ttf"),
+    "rockabilly-1": require("./assets/fonts/Rockabilly.ttf"),
+  });
+};
 
 export default function App() {
   const [userNumber, setuserNumber] = useState();
+  const [rounds, setRounds] = useState(0);
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  if (!dataLoaded) {
+    return (
+      <AppLoading
+        startAsync={fetchFonts}
+        onFinish={() => setDataLoaded(true)}
+        onError={(err) => console.log(err)}
+      />
+    );
+  }
+  const setRoundsHandler = (rnds) => {
+    setRounds(rnds);
+  };
   const setuserNumberHandler = (inputno) => {
     setuserNumber(inputno);
   };
+  const configureNewGameHandler = () => {
+    setRounds(0);
+    setuserNumber(null);
+  };
   let content = <FirstScreen onStart={setuserNumberHandler} />;
-  if (userNumber) {
+  if (userNumber && rounds <= 0) {
     // console.log(userNumber);
-    content = <GameView userChoice={userNumber} />;
+    content = (
+      <GameView userChoice={userNumber} onGameover={setRoundsHandler} />
+    );
+  } else if (rounds > 0) {
+    content = (
+      <GameOver
+        roundsNumber={rounds}
+        userNumber={userNumber}
+        onRestart={configureNewGameHandler}
+      />
+    );
   }
   return (
     <View style={styles.container}>
