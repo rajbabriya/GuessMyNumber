@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import GameView from "./screens/GameView.js";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Header from "./components/header.js";
+import Header from "./components/header";
 import FirstScreen from "./screens/firstScreen.js";
 import GameOver from "./screens/GameOver.js";
 import * as Font from "expo-font";
@@ -11,6 +11,8 @@ import AppLoading from "expo-app-loading";
 
 const fetchFonts = () => {
   return Font.loadAsync({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
     drivecorps: require("./assets/fonts/drivecorps.ttf"),
     "black-light1": require("./assets/fonts/TheBlacklight.ttf"),
     "drive-corps-3D": require("./assets/fonts/drivecorps3d.ttf"),
@@ -43,6 +45,13 @@ export default function App() {
     setuserNumber(null);
   };
   let content = <FirstScreen onStart={setuserNumberHandler} />;
+  // content = (
+  //   <GameOver
+  //     roundsNumber={1}
+  //     userNumber={1}
+  //     onRestart={configureNewGameHandler}
+  //   />
+  // );
   if (userNumber && rounds <= 0) {
     // console.log(userNumber);
     content = (

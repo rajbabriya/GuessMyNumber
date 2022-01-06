@@ -4,8 +4,10 @@ import Colors from "../constants/colors";
 
 const NumberContainer = (props) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.textFont}>{props.children}</Text>
+    <View style={{ ...styles.container, ...props.style }}>
+      <Text style={{ ...styles.textFont, ...props.style }}>
+        {props.children}
+      </Text>
     </View>
   );
 };
@@ -22,6 +24,6 @@ const styles = StyleSheet.create({
   },
   textFont: {
     color: Colors.customRed,
-    fontSize: 24,
+    // fontSize: 24,
   },
 });
