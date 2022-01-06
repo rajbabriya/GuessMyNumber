@@ -8,6 +8,7 @@ import GameOver from "./screens/GameOver.js";
 import * as Font from "expo-font";
 // import { AppLoading } from "expo";
 import AppLoading from "expo-app-loading";
+import Colors from "./constants/colors";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -77,6 +78,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.lighterSky,
   },
 });
